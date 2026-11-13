@@ -24,9 +24,84 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=2" />
+  <link rel="stylesheet" href="/css/style.css?v=3" />
+  <script>document.documentElement.classList.add('is-loading');</script>
 </head>
 <body>
+
+  <!-- ================= LOADER ================= -->
+  <div class="loader" id="loader" role="status" aria-label="Loading $YIPPEE">
+    <div class="loader-sky" aria-hidden="true">
+      <span class="l-cloud lc1"></span><span class="l-cloud lc2"></span>
+      <span class="l-star" style="--x:18%;--y:22%"></span><span class="l-star" style="--x:80%;--y:16%;--d:.4s"></span>
+      <span class="l-star" style="--x:70%;--y:62%;--d:.8s"></span><span class="l-star" style="--x:12%;--y:68%;--d:1.2s"></span>
+    </div>
+
+    <div class="loader-stage" aria-hidden="true">
+      <img class="loader-yippee" src="/img/yippee-512.png" alt="" width="512" height="529" />
+      <svg class="loader-planet" viewBox="-150 -150 300 300">
+        <g class="planet-spin">
+          <!-- tree -->
+          <g transform="rotate(-50) translate(0 -106) scale(1.55)">
+            <rect x="-5" y="-30" width="10" height="32" rx="3" fill="#a0612b" stroke="#14142b" stroke-width="4"/>
+            <circle cx="0" cy="-40" r="20" fill="#3ed16b" stroke="#14142b" stroke-width="4"/>
+            <circle cx="-6" cy="-46" r="5" fill="#ff4f6d" stroke="#14142b" stroke-width="2"/>
+          </g>
+          <!-- daisies -->
+          <g transform="rotate(10) translate(0 -108) scale(1.55)"><g fill="#fff" stroke="#14142b" stroke-width="2.5"><ellipse cx="0" cy="-16" rx="4" ry="7"/><ellipse cx="-8" cy="-10" rx="7" ry="4"/><ellipse cx="8" cy="-10" rx="7" ry="4"/><ellipse cx="0" cy="-4" rx="4" ry="6"/></g><circle cx="0" cy="-10" r="4.5" fill="#ffd60a" stroke="#14142b" stroke-width="2.5"/></g>
+          <g transform="rotate(120) translate(0 -108) scale(1.55)"><g fill="#fff" stroke="#14142b" stroke-width="2.5"><ellipse cx="0" cy="-16" rx="4" ry="7"/><ellipse cx="-8" cy="-10" rx="7" ry="4"/><ellipse cx="8" cy="-10" rx="7" ry="4"/><ellipse cx="0" cy="-4" rx="4" ry="6"/></g><circle cx="0" cy="-10" r="4.5" fill="#ff4fa3" stroke="#14142b" stroke-width="2.5"/></g>
+          <g transform="rotate(230) translate(0 -108) scale(1.55)"><g fill="#fff" stroke="#14142b" stroke-width="2.5"><ellipse cx="0" cy="-16" rx="4" ry="7"/><ellipse cx="-8" cy="-10" rx="7" ry="4"/><ellipse cx="8" cy="-10" rx="7" ry="4"/><ellipse cx="0" cy="-4" rx="4" ry="6"/></g><circle cx="0" cy="-10" r="4.5" fill="#ffd60a" stroke="#14142b" stroke-width="2.5"/></g>
+          <!-- little house -->
+          <g transform="rotate(170) translate(0 -106) scale(1.55)">
+            <rect x="-16" y="-24" width="32" height="26" fill="#fff0a3" stroke="#14142b" stroke-width="4"/>
+            <path d="M-22 -22 L0 -42 L22 -22 Z" fill="#ff4f6d" stroke="#14142b" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="-5" y="-12" width="10" height="14" fill="#2f8cff" stroke="#14142b" stroke-width="3"/>
+          </g>
+          <!-- mushroom -->
+          <g transform="rotate(280) translate(0 -108) scale(1.55)">
+            <rect x="-4" y="-14" width="8" height="15" rx="3" fill="#fff" stroke="#14142b" stroke-width="3"/>
+            <path d="M-14 -12 C-14 -30 14 -30 14 -12 Z" fill="#9b5cff" stroke="#14142b" stroke-width="3.5" stroke-linejoin="round"/>
+            <circle cx="-4" cy="-20" r="2.5" fill="#fff"/><circle cx="5" cy="-17" r="2" fill="#fff"/>
+          </g>
+          <!-- planet -->
+          <circle r="110" fill="#7ee04f" stroke="#14142b" stroke-width="6"/>
+          <path d="M-110 0 A110 110 0 0 0 110 0 A110 110 0 0 1 -110 0" fill="#4cc23a" opacity=".55"/>
+          <circle cx="-40" cy="-30" r="14" fill="#4cc23a" stroke="#14142b" stroke-width="3"/>
+          <circle cx="45" cy="25" r="20" fill="#4cc23a" stroke="#14142b" stroke-width="3"/>
+          <circle cx="-25" cy="55" r="9" fill="#4cc23a" stroke="#14142b" stroke-width="3"/>
+          <circle cx="30" cy="-60" r="7" fill="#4cc23a" stroke="#14142b" stroke-width="3"/>
+        </g>
+        <circle r="110" fill="none" stroke="#14142b" stroke-width="6"/>
+        <path d="M-70 -78 A104 104 0 0 1 -20 -104" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+      </svg>
+    </div>
+
+    <div class="loader-ui">
+      <p class="loader-word" aria-hidden="true"><span>Y</span><span>I</span><span>P</span><span>P</span><span>E</span><span>E</span></p>
+      <div class="loader-bar" aria-hidden="true"><i></i></div>
+      <p class="loader-tip" data-tip>Lining up the cereal…</p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var root = document.documentElement, el = document.getElementById('loader'), tip = el.querySelector('[data-tip]');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var MIN = reduce ? 600 : 2600, MAX = 7000, t0 = Date.now(), loaded = false, done = false;
+      var tips = ['Lining up the cereal…', 'Finding his headphones…', 'Charging social battery…', 'Counting the charity fees…', 'Yippee!'];
+      var ti = 0, timer = setInterval(function () { ti = Math.min(ti + 1, tips.length - 1); tip.textContent = tips[ti]; }, 600);
+      function finish() {
+        if (done) return; done = true; clearInterval(timer);
+        tip.textContent = 'Yippee!';
+        el.classList.add('is-done');
+        root.classList.remove('is-loading');
+        setTimeout(function () { el.remove(); }, reduce ? 50 : 900);
+      }
+      function check() { if (loaded && Date.now() - t0 >= MIN) finish(); else if (loaded) setTimeout(finish, MIN - (Date.now() - t0)); }
+      window.addEventListener('load', function () { loaded = true; check(); });
+      setTimeout(finish, MAX);
+      el.addEventListener('click', finish);
+    })();
+  </script>
 
   <!-- ================= NAV ================= -->
   <header class="nav" id="top">
@@ -424,7 +499,7 @@
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 
-  <script src="/js/yippee.js?v=2"></script>
-  <script src="/js/main.js?v=2"></script>
+  <script src="/js/yippee.js?v=3"></script>
+  <script src="/js/main.js?v=3"></script>
 </body>
 </html>
