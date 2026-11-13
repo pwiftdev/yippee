@@ -1,0 +1,8 @@
+{
+  "name": "$YIPPEE",
+  "short_name": "YIPPEE",
+  "icons": [{ "src": "/img/favicon.png", "sizes": "256x256", "type": "image/png" }],
+  "theme_color": "#2f8cff",
+  "background_color": "#fff8e7",
+  "display": "standalone"
+}
