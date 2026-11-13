@@ -36,6 +36,7 @@
     </a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#mission">Mission</a>
+      <a href="#impact">Impact</a>
       <a href="#yippees">Yippees</a>
       <a href="#world">His World</a>
       <a href="#buy">How to Buy</a>
@@ -158,6 +159,65 @@
           <p>Not 50%. Not "most of it". <mark>100%</mark> of creator fees go to autism charities.</p>
           <cite>— Yippee, probably (he doesn't talk much)</cite>
         </blockquote>
+      </div>
+    </section>
+
+    <!-- ================= YIPPEE METER ================= -->
+    <section class="section meter-bg" id="impact">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="chip chip-yellow"><i class="live-dot"></i> Live from the blockchain</span>
+          <h2 class="comic-title">The Yippee Meter</h2>
+          <p class="sub">Every $YIPPEE trade sends creator fees to a pump.fun donation account, split between four autism charities.</p>
+        </div>
+
+        <div class="meter reveal" data-meter>
+          <div class="meter-main">
+            <span class="meter-label">Total raised for autism charities</span>
+            <b class="meter-num" data-m-total>…</b>
+            <span class="meter-usd" data-m-total-usd>&nbsp;</span>
+          </div>
+          <div class="meter-side">
+            <span class="meter-label">Waiting for charities to claim</span>
+            <b class="meter-num small" data-m-waiting>…</b>
+            <span class="meter-usd" data-m-waiting-usd>&nbsp;</span>
+          </div>
+          <div class="meter-yippee" data-yippee="love" aria-hidden="true"></div>
+        </div>
+
+        <div class="charities">
+          <article class="charity reveal" style="--cc:#ff9a1f">
+            <div class="charity-y" data-yippee="flower" aria-hidden="true"></div>
+            <span class="share">25%</span>
+            <h3>Paws 4 Autism</h3>
+            <p class="charity-amt" data-m-share>…</p>
+          </article>
+          <article class="charity reveal" style="--cc:#3ed16b">
+            <div class="charity-y" data-yippee="sensory" aria-hidden="true"></div>
+            <span class="share">25%</span>
+            <h3>Seeds for Autism</h3>
+            <p class="charity-amt" data-m-share>…</p>
+          </article>
+          <article class="charity reveal" style="--cc:#9b5cff">
+            <div class="charity-y" data-yippee="infinity" aria-hidden="true"></div>
+            <span class="share">25%</span>
+            <h3>Autism Health Inc</h3>
+            <p class="charity-amt" data-m-share>…</p>
+          </article>
+          <article class="charity reveal" style="--cc:#2f8cff">
+            <div class="charity-y" data-yippee="party" aria-hidden="true"></div>
+            <span class="share">25%</span>
+            <h3>Autism Speaks</h3>
+            <p class="charity-amt" data-m-share>…</p>
+          </article>
+        </div>
+
+        <p class="meter-note reveal">
+          Charities claim their share whenever they like — pump.fun handles it automatically. Don't trust, verify:
+          <a href="https://solscan.io/account/5LDC2oS4uxAgMht65pkSKb9cQ4uRzL5ztzjrQFo6KehD" target="_blank" rel="noopener">fee vault</a> ·
+          <a href="https://solscan.io/account/5BnNQt7fhaofQYtrGYpMi1bzZABoz8npwE466Mx6kRAD" target="_blank" rel="noopener">donation account</a>
+          <span data-m-updated></span>
+        </p>
       </div>
     </section>
 

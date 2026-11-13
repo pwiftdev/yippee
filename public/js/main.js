@@ -262,4 +262,64 @@
     window.addEventListener('resize', measure);
     measure();
   }
+
+  /* ---------- yippee meter (live fees from /api/fees) ---------- */
+  const meter = $('[data-meter]');
+  if (meter) {
+    const els = {
+      total: $('[data-m-total]'), totalUsd: $('[data-m-total-usd]'),
+      waiting: $('[data-m-waiting]'), waitingUsd: $('[data-m-waiting-usd]'),
+      shares: $$('[data-m-share]'), updated: $('[data-m-updated]'),
+    };
+    const fmtSol = (v) => {
+      const d = v >= 1000 ? 0 : v >= 100 ? 1 : v >= 10 ? 2 : 3;
+      return v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }) + ' SOL';
+    };
+    const fmtUsd = (v) => (v == null ? ' ' : '≈ $' + v.toLocaleString('en-US', { maximumFractionDigits: v >= 100 ? 0 : 2 }));
+    const shown = { total: 0, waiting: 0 };
+
+    function countTo(el, key, to) {
+      const from = shown[key];
+      shown[key] = to;
+      if (reduceMotion || from === to) { el.textContent = fmtSol(to); return; }
+      const t0 = performance.now();
+      const dur = 1400;
+      (function step(t) {
+        const k = Math.min(1, (t - t0) / dur);
+        const e = 1 - Math.pow(1 - k, 3);
+        el.textContent = fmtSol(from + (to - from) * e);
+        if (k < 1) requestAnimationFrame(step);
+      })(t0);
+    }
+
+    async function loadFees() {
+      try {
+        const r = await fetch('/api/fees', { headers: { accept: 'application/json' } });
+        if (!r.ok) throw new Error(r.status);
+        const d = await r.json();
+        countTo(els.total, 'total', d.totalSol);
+        countTo(els.waiting, 'waiting', d.waitingSol);
+        els.totalUsd.textContent = fmtUsd(d.totalUsd);
+        els.waitingUsd.textContent = fmtUsd(d.waitingUsd);
+        els.shares.forEach((el) => (el.textContent = fmtSol(d.totalSol * 0.25) + ' raised'));
+        els.updated.textContent = 'Updated ' + new Date(d.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } catch (_) {
+        if (!shown.total) {
+          els.total.textContent = els.waiting.textContent = '—';
+          els.shares.forEach((el) => (el.textContent = '—'));
+          els.updated.textContent = 'Live numbers are loading — check back in a moment.';
+        }
+      }
+    }
+
+    let started = false;
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        obs.disconnect();
+        loadFees();
+        setInterval(loadFees, 60000);
+      }
+    }, { rootMargin: '200px' }).observe(meter);
+  }
 })();
